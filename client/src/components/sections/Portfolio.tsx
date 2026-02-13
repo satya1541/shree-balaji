@@ -1,20 +1,60 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-// Using placeholder images for now - would normally be actual portfolio images
+// Using real portfolio images from attached assets
 const portfolioItems = [
-  { id: 1, type: "Wedding", title: "Royal Palace Wedding", image: "https://images.unsplash.com/photo-1519225421980-715cb0202128?auto=format&fit=crop&q=80&w=800", size: "tall" },
-  { id: 2, type: "Corporate", title: "Tech Summit 2025", image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800", size: "normal" },
-  { id: 3, type: "Concert", title: "Live Music Night", image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&q=80&w=800", size: "normal" },
-  { id: 4, type: "Decor", title: "Floral Grandeur", image: "https://images.unsplash.com/photo-1478146896981-b80c46364355?auto=format&fit=crop&q=80&w=800", size: "wide" },
-  { id: 5, type: "Stage", title: "Award Night Setup", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800", size: "tall" },
-  { id: 6, type: "Catering", title: "Luxury Dining", image: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80&w=800", size: "normal" },
+  { 
+    id: 1, 
+    type: "Wedding", 
+    title: "Royal Bridal Grandeur", 
+    image: "/assets/bride_image_1770965767561.png", 
+    size: "tall" 
+  },
+  { 
+    id: 2, 
+    type: "Corporate", 
+    title: "Executive Conference", 
+    image: "/assets/corporate_conference_1770965767562.png", 
+    size: "normal" 
+  },
+  { 
+    id: 3, 
+    type: "Wedding", 
+    title: "Golden Mandap Decor", 
+    image: "/assets/Wedding_Mandap_1770965767567.png", 
+    size: "normal" 
+  },
+  { 
+    id: 4, 
+    type: "Event", 
+    title: "Valentine Special Night", 
+    image: "/assets/valaentine_day_special_1770965767564.png", 
+    size: "wide" 
+  },
+  { 
+    id: 5, 
+    type: "Wedding", 
+    title: "Grand Entrance Portal", 
+    image: "/assets/Wedding_entrance_1770965767565.png", 
+    size: "tall" 
+  },
+  { 
+    id: 6, 
+    type: "Corporate", 
+    title: "Official Summit", 
+    image: "/assets/meeting_hall_1770965767563.png", 
+    size: "normal" 
+  },
+  { 
+    id: 7, 
+    type: "Wedding", 
+    title: "Floral Stage Design", 
+    image: "/assets/Wedding_Stage_1770965767568.png", 
+    size: "wide" 
+  }
 ];
 
 export function Portfolio() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
   return (
     <section id="portfolio" className="py-24 bg-zinc-50">
       <div className="container mx-auto px-4">
