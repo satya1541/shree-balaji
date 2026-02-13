@@ -11,6 +11,7 @@ export function Hero() {
           loop
           muted
           playsInline
+          preload="auto"
           className="w-full h-full object-cover"
         >
           <source src="/assets/hero-bg.mp4" type="video/mp4" />
@@ -22,48 +23,34 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="mb-8"
-        >
-          {/* Main Logo Shine Effect would go here if we were using purely CSS, but simpler to animate the container */}
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gold/20 blur-3xl rounded-full opacity-50 animate-pulse"></div>
-            <img 
-              src="/assets/logo.png" 
-              alt="Balaji Events Logo" 
-              className="h-32 md:h-48 w-auto relative drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]"
-            />
-          </div>
-        </motion.div>
+        {/* Spacer to preserve text alignment after logo removal */}
+        <div className="h-24 sm:h-32 md:h-48 mb-8" />
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium text-white mb-4 tracking-wide"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif font-medium text-white mb-4 tracking-wide"
         >
           Creating <span className="text-gradient-gold font-bold italic">Unforgettable</span> Experiences
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
-          className="text-base md:text-xl text-white/80 max-w-2xl font-sans tracking-wider mb-12"
+          className="text-sm sm:text-base md:text-xl text-white/80 max-w-2xl font-sans tracking-wider mb-8 md:mb-12 px-4"
         >
           COMPLETE EVENT PLANNING & ENTERTAINMENT SOLUTIONS
         </motion.p>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto px-4 sm:px-0"
         >
-          <a 
+          <a
             href="#contact"
             className="group relative px-8 py-4 bg-transparent border border-gold overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
           >
@@ -73,7 +60,7 @@ export function Hero() {
             </span>
           </a>
 
-          <a 
+          <a
             href="#portfolio"
             className="px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/20 text-white font-sans font-bold tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300"
           >
@@ -81,9 +68,9 @@ export function Hero() {
           </a>
         </motion.div>
       </div>
-      
+
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}

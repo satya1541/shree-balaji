@@ -37,45 +37,37 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-shine: shine 1.5s ease-in-out;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-12deg); opacity: 0; }
+  50% { opacity: 0.15; }
+  100% { transform: translateX(200%) skewX(-12deg); opacity: 0; }
 }
 
 :root {
-  /* Ivory/Cream Background #F8F5F0 -> hsl(38, 33%, 96%) */
   --background: hsl(38 33% 96%);
-  /* Charcoal #1C1C1C -> hsl(0, 0%, 11%) */
   --foreground: hsl(0 0% 11%);
-
-  /* White card backgrounds for glassmorphism base */
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(0 0% 11%);
-
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(0 0% 11%);
-
-  /* Royal Gold #D4AF37 -> hsl(47, 63%, 52%) */
   --primary: hsl(47 63% 52%);
   --primary-foreground: hsl(0 0% 11%);
-
-  /* Deep Red #A00000 -> hsl(0, 100%, 31%) */
   --secondary: hsl(0 100% 31%);
   --secondary-foreground: hsl(0 0% 100%);
-
   --muted: hsl(38 10% 90%);
   --muted-foreground: hsl(0 0% 40%);
-
-  --accent: hsl(47 63% 95%); /* Very light gold */
+  --accent: hsl(47 63% 95%);
   --accent-foreground: hsl(0 0% 11%);
-
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(0 0% 98%);
-
   --border: hsl(47 30% 85%);
   --input: hsl(47 30% 85%);
   --ring: hsl(47 63% 52%);
-
   --radius: 0.25rem;
-  
-  /* Custom Palette Variables */
   --gold: hsl(47 63% 52%);
   --gold-light: hsl(47 80% 70%);
   --gold-dark: hsl(45 70% 40%);
@@ -83,7 +75,6 @@
 }
 
 .dark {
-  /* Dark luxury mode if needed later */
   --background: hsl(0 0% 5%);
   --foreground: hsl(38 33% 96%);
   --card: hsl(0 0% 8%);
@@ -129,6 +120,18 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* === PERFORMANCE GLOBALS === */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -138,4 +141,29 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-serif;
+}
+
+/* Off-screen section optimization */
+section {
+  contain: layout style;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize media rendering */
+img, video {
+  content-visibility: auto;
+}
+
+/* Smoother transitions globally */
+a, button, [role="button"] {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

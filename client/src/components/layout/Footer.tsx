@@ -6,10 +6,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-black text-white pt-20 pb-10 border-t border-white/10">
+    <footer className="bg-black text-white pt-12 md:pt-20 pb-8 md:pb-10 border-t border-white/10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
+
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <img src="/assets/logo.png" alt="Balaji Logo" className="h-16 w-auto brightness-0 invert" />
@@ -50,8 +50,14 @@ export function Footer() {
           <p className="text-white/40 text-sm">
             © {new Date().getFullYear()} Balaji Events & Entertainment. All rights reserved.
           </p>
-          
-          <button 
+
+          <div className="flex items-center gap-6 text-white/40 text-sm">
+            <a href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</a>
+            <span className="text-white/20">|</span>
+            <a href="/terms-and-conditions" className="hover:text-gold transition-colors">Terms & Conditions</a>
+          </div>
+
+          <button
             onClick={scrollToTop}
             className="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-black transition-all"
           >

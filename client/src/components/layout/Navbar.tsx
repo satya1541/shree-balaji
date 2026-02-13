@@ -32,8 +32,8 @@ export function Navbar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled 
-          ? "bg-background/90 backdrop-blur-md shadow-lg py-3" 
+        isScrolled
+          ? "bg-background/90 backdrop-blur-md shadow-lg py-3"
           : "bg-transparent py-6"
       )}
     >
@@ -41,14 +41,14 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/">
           <a className="flex items-center gap-2 group">
-            <img 
-              src="/assets/logo.png" 
-              alt="Balaji Events" 
-              className="h-12 w-auto md:h-16 transition-transform group-hover:scale-105 duration-500" 
+            <img
+              src="/assets/logo.png"
+              alt="Balaji Events"
+              className="h-12 w-auto md:h-16 transition-transform group-hover:scale-105 duration-500"
             />
             <div className={cn("hidden lg:block", !isScrolled && "text-white")}>
-              <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">BALAJI</h1>
-              <p className="text-[10px] uppercase tracking-[0.2em] font-sans">Events & Entertainment</p>
+              <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">श्री BALAJI</h1>
+              <p className="text-[10px] uppercase tracking-[0.2em] font-sans"> Events & Entertainment</p>
             </div>
           </a>
         </Link>
@@ -68,7 +68,8 @@ export function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-          <Button 
+          <Button
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             className="bg-gradient-to-r from-gold to-gold-light hover:from-white hover:to-white hover:text-gold text-black font-bold border-none rounded-none px-6 tracking-widest"
           >
             PLAN EVENT
@@ -77,7 +78,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <div className="md:hidden">
-          <button 
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={cn("p-2", isScrolled ? "text-foreground" : "text-white")}
           >
@@ -106,10 +107,26 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <div className="flex gap-6 mt-8">
-                <Instagram className="text-gold w-6 h-6" />
-                <Facebook className="text-gold w-6 h-6" />
-                <Phone className="text-gold w-6 h-6" />
+              <div className="flex flex-col gap-6 mt-8 items-center w-full px-8">
+                <Button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="w-full bg-gradient-to-r from-gold to-gold-light text-black font-bold uppercase tracking-widest py-6"
+                >
+                  Plan Event
+                </Button>
+
+                <div className="flex gap-8">
+                  <a href="https://www.instagram.com/shree_balajievents?igsh=cGVlMzV3Z3dpNmNl" target="_blank" rel="noopener noreferrer" className="text-gold hover:text-white transition-colors">
+                    <Instagram className="w-8 h-8" />
+                  </a>
+                  {/* Phone link */}
+                  <a href="tel:+918917290824" className="text-gold hover:text-white transition-colors">
+                    <Phone className="w-8 h-8" />
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

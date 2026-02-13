@@ -4,3 +4,4 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+client/public/assets/wedding_hall_video.mp4

@@ -25,7 +25,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-zinc-900 text-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-zinc-900 text-white relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-black/80 to-transparent z-0"></div>
@@ -33,7 +33,7 @@ export function Testimonials() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="text-gold font-sans uppercase tracking-[0.2em] text-sm font-semibold">Testimonials</span>
-          <h2 className="text-4xl md:text-5xl font-serif mt-4 text-white">Client Love</h2>
+          <h2 className="text-3xl md:text-5xl font-serif mt-4 text-white">Client Love</h2>
           <div className="w-16 h-[1px] bg-gold mx-auto mt-6"></div>
         </div>
 
