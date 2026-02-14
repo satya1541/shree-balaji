@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   HeartHandshake,
   Building2,
@@ -98,7 +99,7 @@ const bottomServices: ServiceItem[] = [
     desc: "Cinematic videography, candid photography, and drone shoots.",
     num: "10",
     image: "/assets/bride_image_2.png",
-    video: "/assets/wedding_hall_video.mp4"
+    video: "https://x102zam.s3.ap-south-2.amazonaws.com/wedding_hall_video.mp4"
   },
   {
     icon: CalendarCheck,
@@ -124,9 +125,23 @@ const fadeUp = {
 
 function SmallCard({ service }: { service: ServiceItem }) {
   const isHighlight = service.highlight;
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-20% 0px -20% 0px" }); // Trigger when card is substantially in view
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Active state: True if hovered (desktop default behavior via CSS) OR if in view on mobile
+  const forceActive = isMobile && isInView;
 
   return (
     <motion.div
+      ref={ref}
       variants={fadeUp}
       onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
       className={`group relative rounded-xl overflow-hidden cursor-pointer duration-500 hover:-translate-y-1 ${isHighlight ? "shadow-[0_0_30px_rgba(212,175,55,0.15)]" : "hover:shadow-[0_0_20px_rgba(212,175,55,0.1)]"
@@ -140,7 +155,7 @@ function SmallCard({ service }: { service: ServiceItem }) {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            className={`w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 opacity-60 group-hover:opacity-100 ${forceActive ? "scale-110 opacity-100" : ""}`}
           >
             <source src={service.video} type="video/mp4" />
           </video>
@@ -150,7 +165,7 @@ function SmallCard({ service }: { service: ServiceItem }) {
             alt={service.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 opacity-60 group-hover:opacity-100"
+            className={`w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110 opacity-60 group-hover:opacity-100 ${forceActive ? "scale-110 opacity-100" : ""}`}
           />
         )}
       </div>
@@ -161,7 +176,7 @@ function SmallCard({ service }: { service: ServiceItem }) {
       {/* Cinematic Border with Glow */}
       <div className={`absolute inset-0 rounded-xl border transition-all duration-500 ${isHighlight
         ? "border-gold/60 shadow-[inset_0_0_20px_rgba(212,175,55,0.2)]"
-        : "border-white/10 group-hover:border-gold/40 group-hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.1)]"
+        : `border-white/10 group-hover:border-gold/40 group-hover:shadow-[inset_0_0_15px_rgba(212,175,55,0.1)] ${forceActive ? "border-gold/40 shadow-[inset_0_0_15px_rgba(212,175,55,0.1)]" : ""}`
         }`} />
 
       {/* Shine Effect */}
@@ -173,15 +188,15 @@ function SmallCard({ service }: { service: ServiceItem }) {
           {/* Icon Container */}
           <div className={`p-3 rounded-lg border transition-all duration-500 ${isHighlight
             ? "bg-gradient-to-br from-gold/20 to-black border-gold/40 shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-            : "bg-black/40 border-white/10 group-hover:bg-gold/[0.1] group-hover:border-gold/30 backdrop-blur-sm"
+            : `bg-black/40 border-white/10 group-hover:bg-gold/[0.1] group-hover:border-gold/30 backdrop-blur-sm ${forceActive ? "bg-gold/[0.1] border-gold/30" : ""}`
             }`}>
             <service.icon
               size={24}
               strokeWidth={1}
-              className={`${isHighlight ? "text-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" : "text-gold/90 group-hover:text-gold group-hover:drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]"} transition-all duration-500`}
+              className={`${isHighlight ? "text-gold drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" : `text-gold/90 group-hover:text-gold group-hover:drop-shadow-[0_0_5px_rgba(212,175,55,0.5)] ${forceActive ? "text-gold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]" : ""}`} transition-all duration-500`}
             />
           </div>
-          <span className={`font-serif text-3xl font-light select-none transition-colors duration-500 ${isHighlight ? "text-gold drop-shadow-[0_0_2px_rgba(212,175,55,0.5)]" : "text-white/40 group-hover:text-gold/60"
+          <span className={`font-serif text-3xl font-light select-none transition-colors duration-500 ${isHighlight ? "text-gold drop-shadow-[0_0_2px_rgba(212,175,55,0.5)]" : `text-white/40 group-hover:text-gold/60 ${forceActive ? "text-gold/60" : ""}`
             }`}>
             {service.num}
           </span>
@@ -189,17 +204,17 @@ function SmallCard({ service }: { service: ServiceItem }) {
 
         {/* Title */}
         <div className="mt-auto">
-          <h3 className="text-sm font-sans font-bold text-white uppercase tracking-[0.1em] mb-2 group-hover:text-gold transition-colors duration-300 drop-shadow-md translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <h3 className={`text-sm font-sans font-bold text-white uppercase tracking-[0.1em] mb-2 group-hover:text-gold transition-colors duration-300 drop-shadow-md translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ${forceActive ? "text-gold translate-y-0" : ""}`}>
             {service.title}
           </h3>
 
           {/* Golden Line Separator */}
-          <div className={`h-[1px] w-12 mb-3 transition-all duration-500 ${isHighlight ? "bg-gold shadow-[0_0_5px_rgba(212,175,55,0.8)]" : "bg-white/40 group-hover:bg-gold/80 group-hover:w-full"
+          <div className={`h-[1px] w-12 mb-3 transition-all duration-500 ${isHighlight ? "bg-gold shadow-[0_0_5px_rgba(212,175,55,0.8)]" : `bg-white/40 group-hover:bg-gold/80 group-hover:w-full ${forceActive ? "bg-gold/80 w-full" : ""}`
             }`} />
 
-          {/* Description - Hidden by default, revealed on hover */}
-          <div className="overflow-hidden h-0 group-hover:h-auto transition-all duration-500">
-            <p className="text-xs text-stone-200 leading-relaxed group-hover:text-white transition-opacity duration-500 opacity-0 group-hover:opacity-100 line-clamp-3 drop-shadow-sm font-medium pb-2">
+          {/* Description - Hidden by default, revealed on hover or scroll on mobile */}
+          <div className={`overflow-hidden transition-all duration-500 ${forceActive ? "h-auto" : "h-0 group-hover:h-auto"}`}>
+            <p className={`text-xs text-stone-200 leading-relaxed group-hover:text-white transition-opacity duration-500 line-clamp-3 drop-shadow-sm font-medium pb-2 ${forceActive ? "text-white opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
               {service.desc}
             </p>
           </div>

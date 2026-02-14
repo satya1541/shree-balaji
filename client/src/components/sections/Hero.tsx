@@ -14,7 +14,7 @@ export function Hero() {
           preload="auto"
           className="w-full h-full object-cover"
         >
-          <source src="/assets/hero-bg.mp4" type="video/mp4" />
+          <source src="https://x102zam.s3.ap-south-2.amazonaws.com/logo+video.mp4" type="video/mp4" />
         </video>
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
