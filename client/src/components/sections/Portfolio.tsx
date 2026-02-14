@@ -44,7 +44,7 @@ const portfolioItems: PortfolioItem[] = [
     id: 4,
     type: "Wedding",
     title: "Grand Wedding Hall",
-    video: "/assets/wedding_hall_video.mp4",
+    video: "https://x102zam.s3.ap-south-2.amazonaws.com/wedding_hall_video.mp4",
     image: "/assets/wedding_hall_decoration.png",
     size: "wide",
     mediaType: "video"
