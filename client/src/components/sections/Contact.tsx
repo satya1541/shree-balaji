@@ -137,9 +137,9 @@ export function Contact() {
 
             <motion.div variants={containerVariants} className="space-y-8">
               {[
-                { icon: MapPin, title: "Visit Us", content: <>Ketuka Complex-2, Plot No.- 531, 2nd Floor,<br />Jagamara Road, Khandagiri,<br />Bhubaneswar, India 751030</> },
+                { icon: MapPin, title: "Visit Us", content: <>Unit- 35, Badagarh, Elegance society,<br />Plot No-9429, Cuttack - Puri Bypass Rd,<br />near SR Valley Road, Mandap,<br />Bhubaneswar, Odisha 751018</> },
                 { icon: Phone, title: "Call Us", content: "+91 89172 90824" },
-                { icon: Mail, title: "Email Us", content: "info@balajievents.com" },
+                { icon: Mail, title: "Email Us", content: "info.shreebalajievents@gmail.com" },
               ].map((item, i) => (
                 <motion.div key={i} variants={contactInfoVariants} className="flex items-start gap-4 group">
                   <div className="p-3 bg-gold/10 rounded-full text-gold mt-1 group-hover:bg-gold group-hover:text-black transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]">
